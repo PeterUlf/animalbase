@@ -12,11 +12,17 @@ const Animal = {
     type: "",
     age: 0
 };
+//----------------------------------CODE PUJ
+const myHeading = document.querySelectorAll("#sorting > th");
 
 function start( ) {
     console.log("ready");
 
     // TODO: Add event-listeners to filter and sort buttons
+   //----------------------------------CODE PUJ
+    myHeading.forEach(botton => {
+        botton.addEventListener("click", sortButtonClick)
+    });
 
     loadJSON();
 }
@@ -74,19 +80,7 @@ function displayAnimal( animal ) {
 
 
 
-
-
-
-
-
-
-
-
-
-
 //--------------------------------------SORT
-//console.log("animals =", allAnimals);
- //let animals = allAnimals;
 
 
 
@@ -152,21 +146,7 @@ function mySort(sortBy, sortDirection){
 }
 
 
-
-
-
 //--------------------------------------FILTER
-
-
-
-
-
-
-
-
-
-
-
 
 
 
