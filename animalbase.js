@@ -3,7 +3,7 @@
 window.addEventListener("DOMContentLoaded", start);
 
 let allAnimals = [];
-let animals = [];
+let currentAnimals = [];
 
 // The prototype for all animals: 
 const Animal = {
@@ -14,6 +14,7 @@ const Animal = {
 };
 //----------------------------------CODE PUJ
 const myHeading = document.querySelectorAll("#sorting > th");
+const MyBottons = document.querySelectorAll(".filter");
 
 function start( ) {
     console.log("ready");
@@ -23,6 +24,11 @@ function start( ) {
     myHeading.forEach(botton => {
         botton.addEventListener("click", sortButtonClick)
     });
+
+    MyBottons.forEach(botton => {
+        botton.addEventListener("click", filterBottonClick)
+    });
+
 
     loadJSON();
 }
@@ -38,7 +44,7 @@ async function loadJSON() {
 
 function prepareObjects( jsonData ) {
     allAnimals = jsonData.map( preapareObject );
-    animals = allAnimals;
+    currentAnimals = allAnimals.filter(allAnimals => true);
     // TODO: This might not be the function we want to call first
     displayList(allAnimals);
 }
@@ -84,10 +90,10 @@ function displayAnimal( animal ) {
 
 
 
-const myHeading = document.querySelectorAll("#sorting > th");
-myHeading.forEach(botton => {
-    botton.addEventListener("click", sortButtonClick)
-});
+// const myHeading = document.querySelectorAll("#sorting > th");
+// myHeading.forEach(botton => {
+//     botton.addEventListener("click", sortButtonClick)
+// });
 
 function sortButtonClick(){
     console.log("sortButton");
@@ -134,7 +140,7 @@ function mySort(sortBy, sortDirection){
 
     } 
 
-   animals.sort(function (a, b) {
+   currentAnimals.sort(function (a, b) {
        var x = a[sortBy];
        var y = b[sortBy];
         if (x < y) { return -1*desc; }
@@ -142,21 +148,14 @@ function mySort(sortBy, sortDirection){
         return 0;
     });
 
-    displayList(animals);
+    displayList(currentAnimals);
 }
 
 
 //--------------------------------------FILTER
 
 
-
-const MyBottons = document.querySelectorAll(".filter");
-
-MyBottons.forEach(botton => {
-    botton.addEventListener("click", filterBotton)
-});
-
-function filterBotton(){
+function filterBottonClick(){
     const filter =this.dataset.filter;
     clearAllSort();
     myFilter(filter);
@@ -166,12 +165,12 @@ function filterBotton(){
 function myFilter(filter){
     console.log("myFilter", filter);
     if (filter === "*"){
-        animals = allAnimals;
-        displayList(animals);  
+        currentAnimals = allAnimals.filter(allAnimals => true);
+        displayList(currentAnimals);  
         
     } else 
     { 
-         animals = allAnimals.filter(allAnimals => allAnimals.type === filter);
-        displayList(animals);
+         currentAnimals = allAnimals.filter(allAnimals => allAnimals.type === filter);
+        displayList(currentAnimals);
     }
 }
