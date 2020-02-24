@@ -14,18 +14,18 @@ const Animal = {
 };
 //----------------------------------CODE PUJ
 const myHeading = document.querySelectorAll("#sorting > th");
-const MyBottons = document.querySelectorAll(".filter");
+const myButtons = document.querySelectorAll(".filter");
 
 function start( ) {
     console.log("ready");
 
     // TODO: Add event-listeners to filter and sort buttons
    //----------------------------------CODE PUJ
-    myHeading.forEach(botton => {
-        botton.addEventListener("click", sortButtonClick)
+    myHeading.forEach(button => {
+        button.addEventListener("click", sortButtonClick)
     });
 
-    MyBottons.forEach(botton => {
+    myButtons.forEach(botton => {
         botton.addEventListener("click", filterBottonClick)
     });
     loadJSON();
@@ -144,7 +144,7 @@ function myFilter(filter){
         displayList(currentAnimals);    
     } else 
     { 
-         currentAnimals = allAnimals.filter(allAnimals => allAnimals.type === filter);
+         currentAnimals = allAnimals.filter(animal => animal.type === filter);
         displayList(currentAnimals);
     }
 }
