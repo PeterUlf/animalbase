@@ -28,11 +28,8 @@ function start( ) {
     MyBottons.forEach(botton => {
         botton.addEventListener("click", filterBottonClick)
     });
-
-
     loadJSON();
 }
-
 
 async function loadJSON() {
     const response = await fetch("animals.json");
@@ -51,7 +48,6 @@ function prepareObjects( jsonData ) {
 
 function preapareObject( jsonObject ) {
     const animal = Object.create(Animal);
-    
     const texts = jsonObject.fullname.split(" ");
     animal.name = texts[0];
     animal.desc = texts[2];
@@ -60,7 +56,6 @@ function preapareObject( jsonObject ) {
 
     return animal;
 }
-
 
 function displayList(animals) {
     // clear the list
@@ -84,16 +79,7 @@ function displayAnimal( animal ) {
     document.querySelector("#list tbody").appendChild( clone );
 }
 
-
-
 //--------------------------------------SORT
-
-
-
-// const myHeading = document.querySelectorAll("#sorting > th");
-// myHeading.forEach(botton => {
-//     botton.addEventListener("click", sortButtonClick)
-// });
 
 function sortButtonClick(){
     console.log("sortButton");
@@ -112,13 +98,8 @@ function sortButtonClick(){
         } else {
             this.dataset.sortDirection = "asc";
             console.log("sortdir asc", this.dataset.sortDirection);
-        }
-       
+        }      
     }
-    
-    
-    
-
     mySort(this.dataset.sort, this.dataset.sortDirection);
 }
 
@@ -127,8 +108,6 @@ function clearAllSort(){
     myHeading.forEach(botton => {
         botton.dataset.action  ="sort";
     });
-
-
 }
 
 function mySort(sortBy, sortDirection){
@@ -137,7 +116,6 @@ function mySort(sortBy, sortDirection){
 
     if (sortDirection === "desc"){
         desc = -1;
-
     } 
 
    currentAnimals.sort(function (a, b) {
@@ -151,23 +129,19 @@ function mySort(sortBy, sortDirection){
     displayList(currentAnimals);
 }
 
-
 //--------------------------------------FILTER
-
 
 function filterBottonClick(){
     const filter =this.dataset.filter;
     clearAllSort();
     myFilter(filter);
-
-
 }
+
 function myFilter(filter){
     console.log("myFilter", filter);
     if (filter === "*"){
         currentAnimals = allAnimals.filter(allAnimals => true);
-        displayList(currentAnimals);  
-        
+        displayList(currentAnimals);    
     } else 
     { 
          currentAnimals = allAnimals.filter(allAnimals => allAnimals.type === filter);
